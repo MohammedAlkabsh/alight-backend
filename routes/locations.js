@@ -49,7 +49,7 @@ const mockData = {
       id: "msnaopqr"
     }
   ],
-  totalElements: 3,
+  totalElements: 9,
   totalPages: 1,
   page: 0,
   size: 20,
@@ -59,10 +59,11 @@ router.get('/', function (req, res, next) {
   res.json(mockData);
 });
 
-router.get('/:id/details', function (req, res, next) {
-  const id = req.params.id;
-  const location = mockData.content.filter(loc => loc.id === id)
-  res.json(location);
+router.get('/search/:text', function (req, res, next) {
+  const text = req.params.text !== '*' ? req.params.text.toLowerCase() : '';
+  const newLocations = mockData.content.filter(loc => loc.name.toLowerCase().includes(text));
+  const newMockData = { ...mockData, content: newLocations }
+  res.json(newMockData);
 });
 
 module.exports = router;
