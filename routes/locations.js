@@ -6,48 +6,24 @@ const mockData = {
     {
       name: "River City Library",
       number: "105647",
-      id: "abcddef"
+      id: "abcddef", 
+      statementId: "8484r8f89u934ru98",
+      statementType: "Check"
     },
     {
       name: "ABC Country School",
       number: "501428",
-      id: "ghijckl"
+      id: "ghijckl", 
+      statementId: "asdff89u9sdfccfa",
+      statementType: "EPayment"
     },
     {
       name: "Big City Board of Education",
       number: "985376",
-      id: "msnopqr"
+      id: "msnopqr", 
+      statementId: "98484r8fcase89u934ru980",
+      statementType: "Check"
     },
-    {
-      name: "River City",
-      number: "1056c47",
-      id: "abcddsef"
-    },
-    {
-      name: "Country School",
-      number: "501428c",
-      id: "ghijackl"
-    },
-    {
-      name: "Big City Board of commerce",
-      number: "9853s76",
-      id: "msnocpqr"
-    },
-    {
-      name: "Riverr City Library",
-      number: "10564c7",
-      id: "abcaddef"
-    },
-    {
-      name: "ABCD Country School",
-      number: "50142v8",
-      id: "ghiajckl"
-    },
-    {
-      name: "Biger City Board of Education",
-      number: "9853c76",
-      id: "msnaopqr"
-    }
   ],
   totalElements: 9,
   totalPages: 1,
@@ -57,6 +33,12 @@ const mockData = {
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.json(mockData);
+});
+
+router.get('/:number', function(req, res, next) {
+  const number = req.params.number;
+  const foundLocation = mockData.content.find(loc => loc.number === number);
+  res.json(foundLocation);
 });
 
 router.get('/search/:text', function (req, res, next) {
